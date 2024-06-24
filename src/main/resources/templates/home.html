@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{layout :: head}"></head>
+<body>
+<div class="wrapper">
+    <header th:replace="~{layout :: header-layout}"></header>
+    <main>
+        <div class="home">
+            <img th:src="@{/resources/images/LandingPage1.JPG}" alt="Landing Page Image">
+        </div>
+        <div class="product">
+            <span>
+                Our Product
+            </span>
+            <form class="filter" method="get" th:action="@{/home/index}">
+                <div class="info-item">
+                    <input type="text" name="productName" placeholder="Find Your Dream Bag" th:value="${productName}">
+                </div>
+                <div class="button-end">
+                    <button type="submit" class="green-button"><i class="fas fa-search"></i></button>
+                </div>
+            </form>
+            <div class="card-container">
+                <div th:each="product : ${products}" class="card">
+                    <div class="card-image">
+                        <img th:src="@{${product.productImagePath}}" th:alt="${product.productName}">
+                    </div>
+                    <span class="product-title" th:text="${product.productName}">Product Name</span>
+                    <span class="product-price" th:text="'Rp. ' + ${#numbers.formatDecimal(product.productPrice, 0, 'POINT', 0, 'COMMA')}">Rp. 0</span>
+                    <span class="link">
+                        <a th:href="@{'/products/' + ${product.id}}">Link</a>
+                    </span>
+                </div>
+            </div>
+        </div>
+    </main>
+    <footer th:replace="~{layout :: footer-layout}"></footer>
+</div>
+</body>
+</html>

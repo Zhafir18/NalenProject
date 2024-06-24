@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{layout :: head}">
+    <title>Google Maps Integration</title>
+    <link rel="stylesheet" th:href="@{/resources/css/styles.css}">
+</head>
+<body>
+<div class="wrapper">
+    <header th:replace="~{layout :: header-layout}"></header>
+    <main>
+        <div id="map">
+            <span>Our Location</span>
+            <span class="text">
+                Jl. Rajawali D4/1 Griya Cinere 1
+            </span>
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3965.2571879852394!2d106.77939529999999!3d-6.3607497!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e69eed85555554b%3A0x455e8775075f8a05!2sKATBAG!5e0!3m2!1sid!2sid!4v1719125440873!5m2!1sid!2sid" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        </div>
+    </main>
+    <footer th:replace="~{layout :: footer-layout}"></footer>
+</div>
+<script th:src="@{/resources/js/map.js}" defer></script>
+<script
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCM1lybEvDNRZ4P8OFs5MkXoc8UiBxjZLI&callback=initMap&v=weekly&solution_channel=GMP_CCS_customcontrols_v1"
+        defer
+></script>
+</body>
+</html>

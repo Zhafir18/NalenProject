@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:fragment="head">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/icon" th:href="@{/favicon.ico}">
+    <link rel="stylesheet" th:href="@{/resources/css/normalize.css}">
+    <link rel="stylesheet" th:href="@{/resources/css/site.css}">
+    <link rel="stylesheet" th:href="@{/resources/css/font-awesome.css}">
+    <script th:src="@{/resources/js/jquery-3.6.0.js}"></script>
+    <script th:src="@{/resources/js/site.js}" defer></script>
+    <title>KATBAG</title>
+</head>
+<body>
+<div class="wrapper">
+    <header th:fragment="header-layout">
+        <div class="nav-bar">
+            <div class="title">
+                <a th:href="@{/}">
+                    <span>KATBAG</span>
+                </a>
+            </div>
+            <div class="contact">
+                <div class="maps">
+                    <a th:href="@{/maps/index}"><i class="fas fa-map-marker-alt"></i></a>
+                </div>
+                <div class="burger">
+                    <a href="javascript:;" class="contact-button">Contact</a>
+                </div>
+            </div>
+        </div>
+    </header>
+</div>
+<footer th:fragment="footer-layout">
+    <div class="footer-content">
+        <div class="footer-contact">
+            <h4>Contact Us</h4>
+            <ul>
+                <li><a href="https://wa.me/1234567890" target="_blank"><i class="fab fa-whatsapp"></i> WhatsApp</a></li>
+                <li><a href="https://www.instagram.com/katbagoficial" target="_blank"><i class="fab fa-instagram"></i> Instagram</a></li>
+            </ul>
+        </div>
+    </div>
+</footer>
+</body>
+</html>
