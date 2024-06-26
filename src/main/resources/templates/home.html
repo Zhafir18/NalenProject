@@ -6,13 +6,28 @@
     <header th:replace="~{layout :: header-layout}"></header>
     <main>
         <div class="home">
-            <img th:src="@{/resources/images/LandingPage1.JPG}" alt="Landing Page Image">
+            <div class="slider">
+                <img th:src="@{/resources/images/LandingPage1.JPG}" class="active" alt="Landing Page Image">
+                <img th:src="@{/resources/images/LandingPage2.JPG}" alt="Landing Page Image">
+                <img th:src="@{/resources/images/LandingPage3.JPG}" alt="Landing Page Image">
+            </div>
+            <div class="buttons">
+                <button onclick="prevSlide()">&#10094;</button>
+                <button onclick="nextSlide()">&#10095;</button>
+            </div>
         </div>
         <div class="product">
             <span>
                 Our Product
             </span>
             <form class="filter" method="get" th:action="@{/home/index}">
+                <span class="search-filter">
+                    <i class="fas fa-sliders-h"></i>
+                    <span>
+                    Search
+                    </span>
+                </span>
+
                 <div class="info-item">
                     <input type="text" name="productName" placeholder="Find Your Dream Bag" th:value="${productName}">
                 </div>
@@ -37,4 +52,60 @@
     <footer th:replace="~{layout :: footer-layout}"></footer>
 </div>
 </body>
+<script>
+    document.querySelector('.search-filter').addEventListener('click', function() {
+        document.querySelector('.filter').classList.toggle('show-elements');
+        document.querySelector('.button-end').classList.toggle('button-end--opened');
+    });
+
+    let currentSlide = 0;
+    let slideInterval;
+
+    function showSlide(index) {
+        const slides = document.querySelectorAll('.slider img');
+        if (index >= slides.length) {
+            currentSlide = 0;
+        } else if (index < 0) {
+            currentSlide = slides.length - 1;
+        } else {
+            currentSlide = index;
+        }
+        slides.forEach((slide, i) => {
+            slide.classList.remove('active');
+            if (i === currentSlide) {
+                slide.classList.add('active');
+            }
+        });
+    }
+
+    function nextSlide() {
+        showSlide(currentSlide + 1);
+    }
+
+    function prevSlide() {
+        showSlide(currentSlide - 1);
+    }
+
+    function startSlideShow() {
+        slideInterval = setInterval(nextSlide, 3000); // Change image every 3 seconds
+    }
+
+    function stopSlideShow() {
+        clearInterval(slideInterval);
+    }
+
+    document.querySelector('.buttons button:first-of-type').addEventListener('click', () => {
+        stopSlideShow();
+        prevSlide();
+        startSlideShow();
+    });
+
+    document.querySelector('.buttons button:last-of-type').addEventListener('click', () => {
+        stopSlideShow();
+        nextSlide();
+        startSlideShow();
+    });
+
+    startSlideShow();
+</script>
 </html>
