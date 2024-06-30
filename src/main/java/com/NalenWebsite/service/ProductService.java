@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class ProductService {
@@ -16,26 +17,26 @@ public class ProductService {
     private ProductRepository productRepository;
 
     public List<ProductListDTO> getAllProducts(String productName) {
-        var data = productRepository.getAllProductListDTO(productName);
-        return data;
+        return productRepository.getAllProductListDTO(productName);
     }
 
     public List<ProductListDTO> getProductList(Long categoryId, String productName) {
-        var data = productRepository.getProductListByCategory(categoryId, productName);
-        return data;
+        return productRepository.getProductListByCategory(categoryId, productName);
     }
 
     public void productImageHandler(UpsertProductDTO dto) {
         var multipartFile = dto.getProductImageFile();
         var isMultipartEmpty = multipartFile.isEmpty();
-        var path = ((dto.getProductImagePath() == null || dto.getProductImagePath().equals(""))
-                && isMultipartEmpty) ? null : dto.getProductImagePath();
+        var path = (Optional.ofNullable(dto.getProductImagePath()).orElse("").isEmpty() && isMultipartEmpty)
+                ? null : dto.getProductImagePath();
         try {
             if (!isMultipartEmpty) {
                 path = FileHelper.uploadProductImage(path, multipartFile);
             }
             dto.setProductImagePath(path);
-        }catch (Exception e) {
+        } catch (Exception e) {
+            // Log the exception
+            e.printStackTrace();
         }
     }
 

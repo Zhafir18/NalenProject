@@ -31,11 +31,11 @@ public class ProductController {
 
     @PostMapping("/upsert")
     public String upsertProduct(@Valid @ModelAttribute("dto") UpsertProductDTO dto, BindingResult bindingResult, Model model) {
-        if (!bindingResult.hasErrors()) {
-            productService.upsertProduct(dto);
-            return "redirect:/product/index";
+        if (bindingResult.hasErrors()) {
+            model.addAttribute("dto", dto);
+            return "product/form"; // Make sure the return path is correct
         }
-        model.addAttribute("dto", dto);
-        return "product/form.html";
+        productService.upsertProduct(dto);
+        return "redirect:/product/index";
     }
 }

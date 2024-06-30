@@ -29,7 +29,7 @@ public class FileHelper {
 
     public static void deleteProductPhoto(String fileName){
         if(fileName != null){
-            var uploadDirectory = "src/main/resources/static/resources/image/product/";
+            var uploadDirectory = "src/main/resources/static/resources/images/";
             var uploadPath = Paths.get(uploadDirectory);
             var filePath = uploadPath.resolve(fileName);
             File file = new File(filePath.toString());

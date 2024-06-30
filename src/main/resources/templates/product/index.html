@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{layout :: head}"></head>
+<body>
+<div class="wrapper">
+  <header th:replace="~{layout :: header-layout}"></header>
+  <main class="product-index">
+    <div>
+      <h4>Product</h4>
+    </div>
+    <form method="get" th:action="@{/product/index}">
+      <input type="text" name="productName" placeholder="Search by name" th:value="${productName}">
+      <button type="submit" class="green-button">Search</button>
+    </form>
+      <a th:href="@{/product/productForm}">Insert</a>
+    <div class="grid-container">
+      <table>
+        <thead>
+        <tr>
+          <th>Action</th>
+          <th>Name</th>
+          <th>Description</th>
+          <th>Price</th>
+          <th>Image</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="row : ${product}" th:object="${row}">
+          <td>
+<!--            <a class="green-button" th:href="@{/product/productUpdateForm(username=${#authentication.getPrincipal().getUsername()}, id=*{id})}" th:if="*{isDiscontinue == false}">Update</a>-->
+<!--            <a class="green-button" th:href="@{/product/delete(id=*{id}, username=${#authentication.getPrincipal().getUsername()})}">Delete</a>-->
+<!--            <a href="javascript:;" class="merch-button green-button" th:attr="data-id=*{id}">Detail</a>-->
+<!--            <a class="green-button" th:if="*{isDiscontinue == false}" th:href="@{/product/setDiscontinue(id=*{id}, username=${#authentication.getPrincipal().getUsername()})}">Discontinue</a>-->
+          </td>
+          <td th:text="*{productName}"></td>
+          <td th:text="*{productDescription}"></td>
+          <td th:text="*{productPrice}"></td>
+          <td>
+            <img th:src="@{*{productImagePath}}" alt="Product Image" style="width: 100px; height: auto;">
+          </td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </main>
+  <footer th:replace="~{layout :: footer-layout}"></footer>
+</div>
+</body>
+</html>

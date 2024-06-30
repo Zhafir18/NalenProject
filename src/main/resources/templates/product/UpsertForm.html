@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{layout :: head}"></head>
+<body>
+<div class="wrapper">
+    <header th:replace="~{layout :: header-layout}"></header>
+    <main>
+        <div>
+            <h4>Add Product</h4>
+        </div>
+        <form class="upsert-form" method="post" th:action="@{/product/upsert}" th:object="${dto}" enctype="multipart/form-data">
+            <input type="hidden" th:field="*{id}">
+            <table>
+                <tbody>
+                <tr>
+                    <td><label for="productName">Name</label></td>
+                    <td>
+                        <input type="text" th:field="*{productName}" id="productName">
+                        <div th:if="${#fields.hasErrors('productName')}" th:errors="*{productName}" class="field-validation-error"></div>
+                    </td>
+                </tr>
+                <tr>
+                    <td><label for="productDescription">Description</label></td>
+                    <td>
+                        <input type="text" th:field="*{productDescription}" id="productDescription">
+                        <div th:if="${#fields.hasErrors('productDescription')}" th:errors="*{productDescription}" class="field-validation-error"></div>
+                    </td>
+                </tr>
+                <tr>
+                    <td><label for="productPrice">Price</label></td>
+                    <td>
+                        <input type="text" th:field="*{productPrice}" id="productPrice">
+                        <div th:if="${#fields.hasErrors('productPrice')}" th:errors="*{productPrice}" class="field-validation-error"></div>
+                    </td>
+                </tr>
+                <tr>
+                    <td><label for="categoryId">Category</label></td>
+                    <td>
+                        <input type="text" th:field="*{categoryId}" id="categoryId">
+                        <div th:if="${#fields.hasErrors('categoryId')}" th:errors="*{categoryId}" class="field-validation-error"></div>
+                    </td>
+                </tr>
+                <tr>
+                    <td><label for="productImageFile">Photo</label></td>
+                    <td>
+                        <input type="file" th:field="*{productImageFile}" id="productImageFile">
+                        <div th:if="${#fields.hasErrors('productImageFile')}" th:errors="*{productImageFile}" class="field-validation-error"></div>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+            <button type="submit" class="green-button">Submit</button>
+            <a class="green-button" th:href="@{/product/index}">Cancel</a>
+        </form>
+    </main>
+</div>
+</body>
+</html>
