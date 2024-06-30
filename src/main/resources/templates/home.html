@@ -9,25 +9,18 @@
             <div class="slider">
                 <img th:src="@{/resources/images/LandingPage1.JPG}" class="active" alt="Landing Page Image">
                 <img th:src="@{/resources/images/LandingPage2.JPG}" alt="Landing Page Image">
-                <img th:src="@{/resources/images/LandingPage3.JPG}" alt="Landing Page Image">
+                <img th:src="@{/resources/images/Logo Katbag.JPG}" alt="Landing Page Image">
             </div>
             <div class="buttons">
                 <button onclick="prevSlide()">&#10094;</button>
                 <button onclick="nextSlide()">&#10095;</button>
             </div>
         </div>
-        <div class="product">
+        <div class="product section">
             <span>
                 Our Product
             </span>
             <form class="filter" method="get" th:action="@{/home/index}">
-                <span class="search-filter">
-                    <i class="fas fa-sliders-h"></i>
-                    <span>
-                    Search
-                    </span>
-                </span>
-
                 <div class="info-item">
                     <input type="text" name="productName" placeholder="Find Your Dream Bag" th:value="${productName}">
                 </div>
@@ -53,10 +46,6 @@
 </div>
 </body>
 <script>
-    document.querySelector('.search-filter').addEventListener('click', function() {
-        document.querySelector('.filter').classList.toggle('show-elements');
-        document.querySelector('.button-end').classList.toggle('button-end--opened');
-    });
 
     let currentSlide = 0;
     let slideInterval;
@@ -107,5 +96,34 @@
     });
 
     startSlideShow();
+
+    // Header scroll effect
+    window.addEventListener('scroll', function() {
+        const header = document.querySelector('header');
+        if (window.scrollY > 50) {
+            header.classList.add('scrolled');
+        } else {
+            header.classList.remove('scrolled');
+        }
+    });
+
+    // Scroll animation for sections
+    const sections = document.querySelectorAll('.section');
+    const observerOptions = {
+        threshold: 0.5
+    };
+
+    const observer = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+            }
+        });
+    }, observerOptions);
+
+    sections.forEach(section => {
+        observer.observe(section);
+    });
+</script>
 </script>
 </html>

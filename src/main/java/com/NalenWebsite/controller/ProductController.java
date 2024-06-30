@@ -19,11 +19,23 @@ public class ProductController {
     public String index(@RequestParam(required = false) String productName, Model model) {
         var product = productService.getAllProducts(productName);
         model.addAttribute("product", product);
-        return "product/index";
+        return "product/index.html";
+    }
+
+    @GetMapping("/productForm")
+    public String insert(Model model) {
+        var dto = new UpsertProductDTO();
+        model.addAttribute("dto", dto);
+        return "/product/UpsertForm.html";
     }
 
     @PostMapping("/upsert")
     public String upsertProduct(@Valid @ModelAttribute("dto") UpsertProductDTO dto, BindingResult bindingResult, Model model) {
-        return "1";
+        if (!bindingResult.hasErrors()) {
+            productService.upsertProduct(dto);
+            return "redirect:/product/index";
+        }
+        model.addAttribute("dto", dto);
+        return "product/form.html";
     }
 }

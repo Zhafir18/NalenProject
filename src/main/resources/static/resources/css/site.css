@@ -10,7 +10,6 @@ html {
 }
 body {
     min-height: 100%;
-    min-width:725px;
 }
 
 body::-webkit-scrollbar {
@@ -46,12 +45,18 @@ fieldset {
     display: flex;
     flex-direction: column;
 }
+
+.wrapper > main.product-index {
+    padding: 50px;
+    min-height: 600px;
+}
+
 .grid-container {
     border-radius: 4px;
 }
 .grid-container table {
     width: 100%;
-    text-align: left;
+    text-align: center;
     border-collapse: collapse;
     margin-top:20px;
 }
@@ -66,6 +71,7 @@ fieldset {
     border-left: #3a466c solid 1px;
     border-right: #3a466c solid 1px;
     color: white;
+    background-color: #e3484d;
 }
 .grid-container th {
     padding: 10px;
@@ -163,13 +169,7 @@ div.grid-container table.category tbody td:first-child {
     display: flex;
     align-items: center;
     padding: 20px;
-}
-
-.wrapper .filter .search-filter {
-    color: #e3484d;
-    display: flex;
-    flex-direction: row;
-    margin-left: 75px;
+    margin: 20px;
 }
 
 
@@ -219,38 +219,12 @@ div.grid-container table.category tbody td:first-child {
     transition: border-bottom 0.1s ease; /* Animasi transisi border-bottom */
     outline: none; /* Hapus outline pada focus (opsional) */
     font-size: 15px;
-    display: none;
+    display: block;
     animation: fadeIn 0.5s ease-out;
 }
 
 .filter .button-end {
-    display: none;
-}
-
-.filter .button-end--opened {
-    display: block;
-}
-
-.filter.show-elements [type=text],
-.filter.show-elements select,
-.filter.show-elements [type=date],
-.filter.show-elements [type=tel],
-.filter.show-elements [type=email],
-.filter.show-elements [type=number],
-.filter.show-elements [type=datetime-local] {
-    animation: fadeIn 0.5s ease-in;
-    display: block;
-}
-
-@keyframes fadeIn {
-    from {
-        opacity: 0;
-        transform: translateY(-10px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
+    display: flex;
 }
 
 /* Efek saat elemen mendapat focus */
@@ -377,7 +351,7 @@ input[readonly] {
     width: 100%;
     height: 550px;
     overflow: hidden;
-    margin-top: 50px;
+    margin-top: 20px;
     display: flex;
     justify-content: center;
 }
@@ -427,6 +401,46 @@ input[readonly] {
 }
 
 .buttons button:hover {
+    background-color: #e3484d;
+}
+
+.section {
+    min-height: 500px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 2em;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+    padding: 20px
+}
+
+.section.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.section:nth-child(even) {
+    background-color: #f0f0f0;
+}
+
+.section:nth-child(odd) {
+    background-color: #ccc;
+}
+
+header {
+    padding: 25px;
+    box-shadow: 5px 5px 5px #8888;
+    background-color: transparent;
+    position: sticky;
+    top: 0;
+    width: 100%;
+    z-index: 1000;
+    transition: background-color 0.5s ease;
+}
+
+header.scrolled {
     background-color: #e3484d;
 }
 
@@ -579,17 +593,24 @@ input[readonly] {
     display: flex;
     flex-direction: row;
     align-items: center;
-    justify-content: space-between;
-}
-.contact {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    margin-right: 20px;
+    justify-content: space-between; /* Mengatur jarak antara elemen di navbar */
+    padding: 0 20px; /* Menambahkan padding di kiri dan kanan */
+    color: white; /* Contoh warna teks */
 }
 
+.nav-bar .title {
+    flex: 1; /* Menggunakan 1 bagian dari ruang yang tersedia */
+    text-align: start; /* Menengahkan teks */
+}
+
+.nav-bar .contact {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end; /* Menyelaraskan contact di kanan */
+    flex: 1; /* Menggunakan 1 bagian dari ruang yang tersedia */
+    margin-right: 0; /* Menghapus margin-right */
+}
 .contact .burger {
-    margin-left: 10px;
     color: white;
 }
 
@@ -707,10 +728,11 @@ footer {
     color: white;
     padding: 20px 0;
     text-align: center;
+    min-width: 1970px;
 }
 
 .footer-content {
-    max-width: 1200px;
+    max-width: 1300px;
     margin: 0 auto;
     padding: 0 20px;
 }
